@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Recibos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Recibos</h2>
+<br />
+<table id="tblGrid"></table>
+
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newRecibo()">Registrar recibo</a>
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:500px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+    <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
+        <div class="form-group">
+            <label for="ProveedorId">Proveedor: </label>
+            <select name="ProveedorId" id="ProveedorId" required class="form-control"></select>           
+        </div>
+
+        <div class="form-group">
+            <label for="Monto">Monto: </label>
+            <input name="Monto" id="Monto" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="MonedaId">Moneda: </label>
+            <select name="MonedaId" id="MonedaId" required class="form-control"></select>  
+        </div>
+
+        <div class="form-group">
+            <label for="Monto">Comentario: </label>
+            <input name="Comentario" id="Comentario" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="Fecha">Fecha: </label>
+            <input name="Fecha" id="Fecha" class="easyui-datebox" required>
+            <input type="hidden" name="UserReg" id="UserReg" value="@ViewBag.UserId" />
+        </div>      
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRecibo()" style="width:100px">Registrar</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:100px">Cancelar</a>
+</div>
+
+@section scripts {
+
+<script src="~/Scripts/recibos.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            loadRecibos('@ViewBag.UserId');
+        });
+</script>
+
+}
+
